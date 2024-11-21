@@ -81,9 +81,9 @@ function escreve_form_resultado(qtdAlunos, cor) {
 		document.write(`<input class="form-control w-50 mx-auto mb-3" type="number" id="mediaAluno${indice}" min="0" max=10 step=0.1 readonly>`)
 	}
 
-	document.write(`<label class="form-text mb-2" for="maiorMedia">Maior média:</label>`)
+	document.write(`<label class="form-text mb-2" for="maiorMedia">Maior média:<span class="text-danger"> A implementar 🚧</span></label>`)
 	document.write(`<input class="form-control w-50 mx-auto mb-3" type="number" id="maiorMedia" min="0" max=10 step=0.1 readonly>`)
-	document.write(`<label class="form-text mb-2" for="menorMedia">Menor média:</label>`)
+	document.write(`<label class="form-text mb-2" for="menorMedia">Menor média:<span class="text-danger"> A implementar 🚧</span></label>`)
 	document.write(`<input class="form-control w-50 mx-auto mb-3" type="number" id="menorMedia" min="0" max=10 step=0.1 readonly>`)
 
 	document.write(`</form>`)
