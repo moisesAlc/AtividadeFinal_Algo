@@ -1,0 +1,100 @@
+<!--PARTICIPANTE DO GRUPO 69
+- Emanuel dos Santos Eliano 2425120
+- Carla Daniele Duarte de Sousa 2424142
+- Raphael Araripe Magalhães 2425278
+- Emanuel Elan Medeiros Araújo 2425243
+- Moisés Alcântara Madeira 2424155
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Média Avaliações</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h3 {
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // vetor notas AV1 e AV2
+        const av1 = [3.5, 3.0, 8.0, 2.5, 9.0];
+        const av2 = [2.0, 7.0, 6.5, 6.5, 4.5];
+
+        const numAlunos = av1.length;
+
+        // Maior e menor da AV1 e AV2
+        let maiorAV1 = av1[0];
+        let menorAV1 = av1[0];
+        let maiorAV2 = av2[0];
+        let menorAV2 = av2[0];
+
+        //Comparando notas
+        for (let i = 1; i < numAlunos; i++) {
+            if (av1[i] > maiorAV1) maiorAV1 = av1[i];
+            if (av1[i] < menorAV1) menorAV1 = av1[i];
+
+            if (av2[i] > maiorAV2) maiorAV2 = av2[i];
+            if (av2[i] < menorAV2) menorAV2 = av2[i];
+        }
+
+        // Resultados MAIOR e MENOR da AV1 e AV2
+        document.write("<h3>Maiores e Menores notas da AV1 e AV2</h3>");
+
+        document.write(`Maior nota da AV1: ${maiorAV1}<br>`);
+        document.write(`Menor nota da AV1: ${menorAV1}<br>`);
+
+        document.write(`Maior nota da AV2: ${maiorAV2}<br>`);
+        document.write(`Menor nota da AV2: ${menorAV2}<br>`);
+
+        // Medias alunos e apresentação em ordem crescente
+        let medias = [];
+        for (let i = 0; i < numAlunos; i++) {
+            medias.push((av1[i] + av2[i]) / 2);
+        }
+
+        // Ordenar as médias em ordem crescente
+        medias.sort((a, b) => a - b);
+        document.write("<h3>Médias da Turma (em ordem crescente)</h3>");
+        document.write(`${medias.join('< ')}<br>`);
+
+        // Determinar maior e menor média
+        let maiorMedia = medias[medias.length - 1];
+        let menorMedia = medias[0];
+
+        document.write("<h3>Maior e Menor Mé dia da turma</h3>");
+        document.write(`Maior média: ${maiorMedia}<br>`);
+        document.write(`Menor média: ${menorMedia}<br>`);
+
+        // Verificar aprovação e recuperação
+        let aprovados = 0;
+        let recuperacao = [];
+
+        for (let i = 0; i < medias.length; i++) {
+            if (medias[i] >= 5.0) {
+                aprovados++;
+            } else {
+                recuperacao.push(medias[i]);
+            }
+        }
+
+        document.write("<h3>Resultados</h3>");
+        document.write(`Aprovados: ${aprovados}<br>`);
+        document.write(`Em Recuperação: ${recuperacao.length}<br>`);
+
+        if (recuperacao.length > 0) {
+            document.write(`Médias alunos em recuperação: ${recuperacao.join(', ')}<br>`);
+        }
+
+    </script>
+</body>
+
+</html>
