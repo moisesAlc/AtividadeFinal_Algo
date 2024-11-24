@@ -3,7 +3,8 @@
 - Carla Daniele Duarte de Sousa 2424142
 - Raphael Araripe Magalhães 2425278
 - Emanuel Elan Medeiros Araújo 2425243
-- Moisés Alcântara Madeira 2424155
+- Moisés Alcântara  Madeira 2424155
+- Antonio Walter Mota Lopes 2425166
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -25,75 +26,133 @@
 
 <body>
     <script>
+        /*
+        Funções ao final do código
+        */
+        //-------------------------------------------------------------------------
+
         // vetor notas AV1 e AV2
         const av1 = [3.5, 3.0, 8.0, 2.5, 9.0];
         const av2 = [2.0, 7.0, 6.5, 6.5, 4.5];
 
         const numAlunos = av1.length;
 
-        // Maior e menor da AV1 e AV2
-        let maiorAV1 = av1[0];
-        let menorAV1 = av1[0];
-        let maiorAV2 = av2[0];
-        let menorAV2 = av2[0];
-
-        //Comparando notas
-        for (let i = 1; i < numAlunos; i++) {
-            if (av1[i] > maiorAV1) maiorAV1 = av1[i];
-            if (av1[i] < menorAV1) menorAV1 = av1[i];
-
-            if (av2[i] > maiorAV2) maiorAV2 = av2[i];
-            if (av2[i] < menorAV2) menorAV2 = av2[i];
-        }
-
         // Resultados MAIOR e MENOR da AV1 e AV2
         document.write("<h3>Maiores e Menores notas da AV1 e AV2</h3>");
 
-        document.write(`Maior nota da AV1: ${maiorAV1}<br>`);
-        document.write(`Menor nota da AV1: ${menorAV1}<br>`);
+        document.write(`Maior nota da AV1: ${encontrar_maior(av1)}<br>`);
+        document.write(`Menor nota da AV1: ${encontrar_menor(av1)}<br>`);
 
-        document.write(`Maior nota da AV2: ${maiorAV2}<br>`);
-        document.write(`Menor nota da AV2: ${menorAV2}<br>`);
+        document.write(`Maior nota da AV2: ${encontrar_maior(av2)}<br>`);
+        document.write(`Menor nota da AV2: ${encontrar_menor(av2)}<br>`);
 
-        // Medias alunos e apresentação em ordem crescente
+        //-------------------------------------------------------------------------
+
+        // Medias alunos
         let medias = [];
         for (let i = 0; i < numAlunos; i++) {
-            medias.push((av1[i] + av2[i]) / 2);
+            medias.push((av1[i] + av2[i]) / 2.0);
         }
 
         // Ordenar as médias em ordem crescente
-        medias.sort((a, b) => a - b);
+
+        let medias_ordenadas = ordenar_bolha(medias)
         document.write("<h3>Médias da Turma (em ordem crescente)</h3>");
-        document.write(`${medias.join('< ')}<br>`);
+        for (let i = 0; i < medias_ordenadas.length; i++) {
+            document.write(`${medias_ordenadas[i]}<br>`);
+        }
+
+        //-------------------------------------------------------------------------
 
         // Determinar maior e menor média
-        let maiorMedia = medias[medias.length - 1];
-        let menorMedia = medias[0];
+        let maiorMedia = encontrar_maior(medias)
+        let menorMedia = encontrar_menor(medias)
 
-        document.write("<h3>Maior e Menor Mé dia da turma</h3>");
+        document.write("<h3>Maior e Menor Média da turma</h3>");
         document.write(`Maior média: ${maiorMedia}<br>`);
         document.write(`Menor média: ${menorMedia}<br>`);
 
+        //-------------------------------------------------------------------------
+
         // Verificar aprovação e recuperação
-        let aprovados = 0;
-        let recuperacao = [];
+        let medias_aprovados = [];
+        let medias_recuperacao = [];
 
         for (let i = 0; i < medias.length; i++) {
             if (medias[i] >= 5.0) {
-                aprovados++;
+                medias_aprovados.push(medias[i]);
             } else {
-                recuperacao.push(medias[i]);
+                medias_recuperacao.push(medias[i]);
             }
         }
 
         document.write("<h3>Resultados</h3>");
-        document.write(`Aprovados: ${aprovados}<br>`);
-        document.write(`Em Recuperação: ${recuperacao.length}<br>`);
+        document.write(`Aprovados: ${medias_aprovados.length}<br>`);
+        document.write(`Em Recuperação: ${medias_recuperacao.length}<br>`);
 
-        if (recuperacao.length > 0) {
-            document.write(`Médias alunos em recuperação: ${recuperacao.join(', ')}<br>`);
+        document.write(`Médias dos alunos em recuperação:<br>`);
+
+        for (let i = 0; i < medias_recuperacao.length; i++) {
+            document.write(`${medias_recuperacao[i]}<br>`)
         }
 
+        //-------------------------------------------------------------------------
+
+        function encontrar_maior(vetor_argumento) {
+
+            let maior = vetor_argumento[0]
+
+            for (let i = 1; i < vetor_argumento.length; i++) {
+                if (vetor_argumento[i] > maior) {
+                    maior = vetor_argumento[i];
+                }
+            }
+
+            return maior
+        }
+
+        function encontrar_menor(vetor_argumento) {
+
+            let menor = vetor_argumento[0]
+
+            for (let i = 1; i < vetor_argumento.length; i++) {
+                if (vetor_argumento[i] < menor) {
+                    menor = vetor_argumento[i];
+                }
+            }
+
+            return menor
+        }
+
+        function encontrar_media(vetor_argumento) {
+            let soma = 0
+
+            for (let i = 0; i < vetor_argumento.length; i++) {
+                soma = soma + vetor_argumento[i]
+            }
+
+            let media = parseFloat(soma) / parseFloat(vetor_argumento.length)
+
+            return media
+        }
+
+        function ordenar_bolha(vetor_argumento) {
+
+            // para evitar modificar o vetor original
+            const vetor_ordenado = [...vetor_argumento];
+
+            for (let i = 0; i < vetor_ordenado.length - 1; i++) {
+                for (let j = 0; j < vetor_ordenado.length - i - 1; j++) {
+                    if (vetor_ordenado[j] > vetor_ordenado[j + 1]) {
+                        let temp = vetor_ordenado[j];
+                        vetor_ordenado[j] = vetor_ordenado[j + 1];
+                        vetor_ordenado[j + 1] = temp;
+                    }
+                }
+            }
+
+            return vetor_ordenado
+        }
     </script>
 </body>
 
