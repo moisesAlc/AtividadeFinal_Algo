@@ -31,11 +31,25 @@
         */
         //-------------------------------------------------------------------------
 
-        // vetor notas AV1 e AV2
-        const av1 = [3.5, 3.0, 8.0, 2.5, 9.0];
-        const av2 = [2.0, 7.0, 6.5, 6.5, 4.5];
+        const numAlunos = parseInt(prompt("Por favor, quantos alunos há na turma? "))
 
-        const numAlunos = av1.length;
+        // vetor notas AV1 e AV2
+        let av1 = [];
+        let av2 = [];
+
+        // Captura das notas da AV1
+        for (i = 0; i < numAlunos; i++) {
+            let nota = parseFloat(prompt(`Qual é a nota no aluno ${i+1} da AV1? (use ponto como separador de decimal)`))
+            document.write(`Aluno ${i+1} tirou ${nota} na AV1<br>`)
+            av1.push(nota)
+        }
+
+        // Captura das notas da AV2
+        for (i = 0; i < numAlunos; i++) {
+            let nota = parseFloat(prompt(`Qual é a nota no aluno ${i+1} da AV2? `))
+            document.write(`Aluno ${i+1} tirou ${nota} na AV2<br>`)
+            av2.push(nota)
+        }
 
         // Resultados MAIOR e MENOR da AV1 e AV2
         document.write("<h3>Maiores e Menores notas da AV1 e AV2</h3>");
